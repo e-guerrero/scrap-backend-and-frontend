@@ -1,0 +1,6 @@
+C:\GTC\scrap\Scrap\Model\bin\Debug\Model.dll
+C:\GTC\scrap\Scrap\Model\bin\Debug\Model.pdb
+C:\GTC\scrap\Scrap\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\GTC\scrap\Scrap\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\GTC\scrap\Scrap\Model\obj\Debug\Model.dll
+C:\GTC\scrap\Scrap\Model\obj\Debug\Model.pdb
