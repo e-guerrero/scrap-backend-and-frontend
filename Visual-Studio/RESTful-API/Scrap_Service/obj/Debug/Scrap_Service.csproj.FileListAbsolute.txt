@@ -1,0 +1,17 @@
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_Service.dll.config
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_Service.dll
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_Service.pdb
+C:\GTC\scrap\Scrap\Scrap_Service\obj\Debug\Scrap_Service.csprojResolveAssemblyReference.cache
+C:\GTC\scrap\Scrap\Scrap_Service\obj\Debug\Scrap_Service.csproj.CoreCompileInputs.cache
+C:\GTC\scrap\Scrap\Scrap_Service\obj\Debug\Scrap_Service.dll
+C:\GTC\scrap\Scrap\Scrap_Service\obj\Debug\Scrap_Service.pdb
+C:\GTC\scrap\Scrap\Scrap_Service\bin\EntityFramework.dll
+C:\GTC\scrap\Scrap\Scrap_Service\bin\EntityFramework.SqlServer.dll
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Model.dll
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_DAL.dll
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Model.pdb
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_DAL.pdb
+C:\GTC\scrap\Scrap\Scrap_Service\bin\Scrap_DAL.dll.config
+C:\GTC\scrap\Scrap\Scrap_Service\bin\EntityFramework.xml
+C:\GTC\scrap\Scrap\Scrap_Service\bin\EntityFramework.SqlServer.xml
+C:\GTC\scrap\Scrap\Scrap_Service\obj\Debug\Scrap_Service.csproj.CopyComplete

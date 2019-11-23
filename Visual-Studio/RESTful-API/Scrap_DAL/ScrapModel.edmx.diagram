@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37239b30849446cb9f604396de62f0d3" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_111206_scrapModel.Manufacturer" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.Model" Width="1.5" PointX="1.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.Offer" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.OfferStat" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.Part" Width="3.75" PointX="0.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.Transaction" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.UserLogin" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_111206_scrapModel.User" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Parts__manID__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Parts__modelId__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Offers__ostat__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Offers__partsID__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Offers__sellerID__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Transacti__offer__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__Transacti__buyer__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_111206_scrapModel.FK__UserLogin__userI__1367E606" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

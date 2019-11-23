@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_111206_scrapModelStoreContainer" CdmEntityContainer="DB_111206_scrapEntities">
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturers">
+          <ScalarProperty Name="manID" ColumnName="manID" />
+          <ScalarProperty Name="manName" ColumnName="manName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.Model">
+        <MappingFragment StoreEntitySet="Models">
+          <ScalarProperty Name="modelID" ColumnName="modelID" />
+          <ScalarProperty Name="modelName" ColumnName="modelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Offers">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.Offer">
+        <MappingFragment StoreEntitySet="Offers">
+          <ScalarProperty Name="offerID" ColumnName="offerID" />
+          <ScalarProperty Name="sellerID" ColumnName="sellerID" />
+          <ScalarProperty Name="partsID" ColumnName="partsID" />
+          <ScalarProperty Name="offerDate" ColumnName="offerDate" />
+          <ScalarProperty Name="ostat" ColumnName="ostat" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferStats">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.OfferStat">
+        <MappingFragment StoreEntitySet="OfferStat">
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="statDes" ColumnName="statDes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parts">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.Part">
+        <MappingFragment StoreEntitySet="Parts">
+          <ScalarProperty Name="partsID" ColumnName="partsID" />
+          <ScalarProperty Name="manID" ColumnName="manID" />
+          <ScalarProperty Name="modelId" ColumnName="modelId" />
+          <ScalarProperty Name="partNum" ColumnName="partNum" />
+          <ScalarProperty Name="partDesc" ColumnName="partDesc" />
+          <ScalarProperty Name="partPic" ColumnName="partPic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="tranId" ColumnName="tranId" />
+          <ScalarProperty Name="offerID" ColumnName="offerID" />
+          <ScalarProperty Name="buyerID" ColumnName="buyerID" />
+          <ScalarProperty Name="tranDate" ColumnName="tranDate" />
+          <ScalarProperty Name="salePrice" ColumnName="salePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogins">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.UserLogin">
+        <MappingFragment StoreEntitySet="UserLogins">
+          <ScalarProperty Name="logInID" ColumnName="logInID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="logInDateTime" ColumnName="logInDateTime" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DB_111206_scrapModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="pwd" ColumnName="pwd" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

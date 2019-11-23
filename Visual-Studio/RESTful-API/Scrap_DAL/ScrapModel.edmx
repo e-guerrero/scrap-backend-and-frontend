@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_111206_scrapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="manID" />
+          </Key>
+          <Property Name="manID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="manName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="modelID" />
+          </Key>
+          <Property Name="modelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modelName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="offerID" />
+          </Key>
+          <Property Name="offerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sellerID" Type="int" />
+          <Property Name="partsID" Type="int" />
+          <Property Name="offerDate" Type="datetime" Nullable="false" />
+          <Property Name="ostat" Type="int" />
+          <Property Name="price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfferStat">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statDes" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="partsID" />
+          </Key>
+          <Property Name="partsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="manID" Type="int" />
+          <Property Name="modelId" Type="int" />
+          <Property Name="partNum" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="partDesc" Type="varchar" MaxLength="8000" />
+          <Property Name="partPic" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="tranId" />
+          </Key>
+          <Property Name="tranId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="offerID" Type="int" />
+          <Property Name="buyerID" Type="int" />
+          <Property Name="tranDate" Type="datetime" Nullable="false" />
+          <Property Name="salePrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="logInID" />
+          </Key>
+          <Property Name="logInID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="logInDateTime" Type="datetime" Nullable="false" />
+          <Property Name="lat" Type="float" />
+          <Property Name="lon" Type="float" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lat" Type="float" />
+          <Property Name="lon" Type="float" />
+        </EntityType>
+        <Association Name="FK__Offers__ostat__24927208">
+          <End Role="OfferStat" Type="Self.OfferStat" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferStat">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="ostat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__partsID__22AA2996">
+          <End Role="Parts" Type="Self.Parts" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="partsID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="partsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__sellerID__21B6055D">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="sellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Parts__manID__1BFD2C07">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="manID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="manID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Parts__modelId__1CF15040">
+          <End Role="Models" Type="Self.Models" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="modelID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="modelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__buyer__2A4B4B5E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="buyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__offer__29572725">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="offerID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="offerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLogin__userI__1367E606">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_111206_scrapModelStoreContainer">
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Models" EntityType="Self.Models" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferStat" EntityType="Self.OfferStat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Offers__ostat__24927208" Association="Self.FK__Offers__ostat__24927208">
+            <End Role="OfferStat" EntitySet="OfferStat" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__partsID__22AA2996" Association="Self.FK__Offers__partsID__22AA2996">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__sellerID__21B6055D" Association="Self.FK__Offers__sellerID__21B6055D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Parts__manID__1BFD2C07" Association="Self.FK__Parts__manID__1BFD2C07">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Parts__modelId__1CF15040" Association="Self.FK__Parts__modelId__1CF15040">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__buyer__2A4B4B5E" Association="Self.FK__Transacti__buyer__2A4B4B5E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__offer__29572725" Association="Self.FK__Transacti__offer__29572725">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLogin__userI__1367E606" Association="Self.FK__UserLogin__userI__1367E606">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_111206_scrapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="manID" />
+          </Key>
+          <Property Name="manID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="manName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Parts" Relationship="Self.FK__Parts__manID__1BFD2C07" FromRole="Manufacturers" ToRole="Parts" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="modelID" />
+          </Key>
+          <Property Name="modelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Parts" Relationship="Self.FK__Parts__modelId__1CF15040" FromRole="Models" ToRole="Parts" />
+        </EntityType>
+        <EntityType Name="Offer">
+          <Key>
+            <PropertyRef Name="offerID" />
+          </Key>
+          <Property Name="offerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sellerID" Type="Int32" />
+          <Property Name="partsID" Type="Int32" />
+          <Property Name="offerDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ostat" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="OfferStat" Relationship="Self.FK__Offers__ostat__24927208" FromRole="Offers" ToRole="OfferStat" />
+          <NavigationProperty Name="Part" Relationship="Self.FK__Offers__partsID__22AA2996" FromRole="Offers" ToRole="Parts" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Offers__sellerID__21B6055D" FromRole="Offers" ToRole="Users" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__offer__29572725" FromRole="Offers" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="OfferStat">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statDes" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__ostat__24927208" FromRole="OfferStat" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="partsID" />
+          </Key>
+          <Property Name="partsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="manID" Type="Int32" />
+          <Property Name="modelId" Type="Int32" />
+          <Property Name="partNum" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="partDesc" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="partPic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Parts__manID__1BFD2C07" FromRole="Parts" ToRole="Manufacturers" />
+          <NavigationProperty Name="Model" Relationship="Self.FK__Parts__modelId__1CF15040" FromRole="Parts" ToRole="Models" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__partsID__22AA2996" FromRole="Parts" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="tranId" />
+          </Key>
+          <Property Name="tranId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offerID" Type="Int32" />
+          <Property Name="buyerID" Type="Int32" />
+          <Property Name="tranDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="salePrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Offer" Relationship="Self.FK__Transacti__offer__29572725" FromRole="Transactions" ToRole="Offers" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Transacti__buyer__2A4B4B5E" FromRole="Transactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="logInID" />
+          </Key>
+          <Property Name="logInID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="logInDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="lon" Type="Double" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserLogin__userI__1367E606" FromRole="UserLogins" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="lon" Type="Double" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__sellerID__21B6055D" FromRole="Users" ToRole="Offers" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__buyer__2A4B4B5E" FromRole="Users" ToRole="Transactions" />
+          <NavigationProperty Name="UserLogins" Relationship="Self.FK__UserLogin__userI__1367E606" FromRole="Users" ToRole="UserLogins" />
+        </EntityType>
+        <Association Name="FK__Parts__manID__1BFD2C07">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="manID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="manID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Parts__modelId__1CF15040">
+          <End Role="Models" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="modelID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="modelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__ostat__24927208">
+          <End Role="OfferStat" Type="Self.OfferStat" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferStat">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="ostat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__partsID__22AA2996">
+          <End Role="Parts" Type="Self.Part" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="partsID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="partsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__sellerID__21B6055D">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="sellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__offer__29572725">
+          <End Role="Offers" Type="Self.Offer" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="offerID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="offerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__buyer__2A4B4B5E">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="buyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLogin__userI__1367E606">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserLogins" Type="Self.UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_111206_scrapEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Models" EntityType="Self.Model" />
+          <EntitySet Name="Offers" EntityType="Self.Offer" />
+          <EntitySet Name="OfferStats" EntityType="Self.OfferStat" />
+          <EntitySet Name="Parts" EntityType="Self.Part" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Parts__manID__1BFD2C07" Association="Self.FK__Parts__manID__1BFD2C07">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Parts__modelId__1CF15040" Association="Self.FK__Parts__modelId__1CF15040">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__ostat__24927208" Association="Self.FK__Offers__ostat__24927208">
+            <End Role="OfferStat" EntitySet="OfferStats" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__partsID__22AA2996" Association="Self.FK__Offers__partsID__22AA2996">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__sellerID__21B6055D" Association="Self.FK__Offers__sellerID__21B6055D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__offer__29572725" Association="Self.FK__Transacti__offer__29572725">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__buyer__2A4B4B5E" Association="Self.FK__Transacti__buyer__2A4B4B5E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLogin__userI__1367E606" Association="Self.FK__UserLogin__userI__1367E606">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_111206_scrapModelStoreContainer" CdmEntityContainer="DB_111206_scrapEntities">
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="manID" ColumnName="manID" />
+                <ScalarProperty Name="manName" ColumnName="manName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.Model">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="modelID" ColumnName="modelID" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.Offer">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="offerID" ColumnName="offerID" />
+                <ScalarProperty Name="sellerID" ColumnName="sellerID" />
+                <ScalarProperty Name="partsID" ColumnName="partsID" />
+                <ScalarProperty Name="offerDate" ColumnName="offerDate" />
+                <ScalarProperty Name="ostat" ColumnName="ostat" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfferStats">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.OfferStat">
+              <MappingFragment StoreEntitySet="OfferStat">
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="statDes" ColumnName="statDes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.Part">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="partsID" ColumnName="partsID" />
+                <ScalarProperty Name="manID" ColumnName="manID" />
+                <ScalarProperty Name="modelId" ColumnName="modelId" />
+                <ScalarProperty Name="partNum" ColumnName="partNum" />
+                <ScalarProperty Name="partDesc" ColumnName="partDesc" />
+                <ScalarProperty Name="partPic" ColumnName="partPic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="tranId" ColumnName="tranId" />
+                <ScalarProperty Name="offerID" ColumnName="offerID" />
+                <ScalarProperty Name="buyerID" ColumnName="buyerID" />
+                <ScalarProperty Name="tranDate" ColumnName="tranDate" />
+                <ScalarProperty Name="salePrice" ColumnName="salePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogins">
+                <ScalarProperty Name="logInID" ColumnName="logInID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="logInDateTime" ColumnName="logInDateTime" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DB_111206_scrapModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
