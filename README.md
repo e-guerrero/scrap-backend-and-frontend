@@ -1,2 +1,7 @@
 # Scrap-App_Backend-and-Frontend
-.NET RESTful API with MS SQL database and iOS frontend. 
+
+Mobile app for selling, buying, and trading used computer parts.
+The stack includes...
+- MS SQL database
+- .NET RESTful Backend
+- iOS Frontend. 
